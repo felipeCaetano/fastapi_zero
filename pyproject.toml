@@ -8,7 +8,12 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.13,<4.0"
 dependencies = [
-    "fastapi[standard] (>=0.115.12,<0.116.0)"
+    "alembic>=1.16.1",
+    "fastapi[standard] (>=0.115.12,<0.116.0)",
+    "pydantic-settings>=2.9.1",
+    "ruff>=0.11.10",
+    "sqlalchemy>=2.0.41",
+    "taskipy>=1.14.1",
 ]
 
 
@@ -36,7 +41,7 @@ preview = true
 quote-style = 'single'
 
 [tool.pytest.ini_options]
-pythonpath = '.'
+pythonpath = 'fastapi_zero'
 addopts = '-p no:warnings'
 
 [tool.taskipy.tasks]
@@ -47,3 +52,11 @@ run = 'fastapi dev fastapi_zero/app.py'
 pre_test = 'task lint'
 test = 'pytest -s -x --cov=fastapi_zero -vv'
 post_test = 'coverage html'
+
+[dependency-groups]
+dev = [
+    "coverage>=7.8.1",
+    "pytest>=8.3.5",
+    "pytest-cov>=6.1.1",
+    "ruff>=0.11.10",
+]
